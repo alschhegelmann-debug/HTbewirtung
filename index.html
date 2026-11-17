@@ -324,6 +324,64 @@ textarea {
 .fbtn{flex:1;padding:15px 10px;border-radius:16px;border:none;font-size:15px;font-weight:800;color:#fff;cursor:pointer}
 .fbtn-send{background:#22c55e}.fbtn-pdf{background:#334477;border:1px solid #4b5f99}
 </style>
+<style id="theme-vars">
+/* HT Trucks & Parts – hell und freundlich in den Logo-Farben */
+:root{
+  --t-bg:linear-gradient(180deg,#eaf3fc 0%,#f7fbff 60%,#ffffff 100%);
+  --t-card:#ffffff; --t-header:#ffffff; --t-input:#f4f8fd; --t-tab:#ffffff;
+  --t-line:#d8e4f2; --t-text:#14274a; --t-head-text:#194999; --t-muted:#5f7393; --t-ph:#9fb0c8;
+  --t-accent:#194999; --t-accent2:#0ca4d3;
+  --t-grad:linear-gradient(135deg,#1f5cc0 0%,#0ca4d3 100%);
+  --t-glow:0 8px 20px rgba(12,120,200,.25); --t-ring:rgba(12,164,211,.18);
+  --t-shadow:0 8px 24px rgba(25,73,153,.10); --t-shadow-sm:0 3px 12px rgba(25,73,153,.06);
+  --t-badge-bg:#e3f4fb; --t-badge-line:#b5e3f3; --t-badge-text:#0a7fa6;
+  --t-soft:#eaf6fc; --t-soft-line:#bfe6f5; --t-dash:#9cc7e6; --t-pdf:#194999;
+}
+body{background-attachment:fixed!important}
+</style>
+<style id="theme">
+/* ===== Farbschema ===== */
+:root{color-scheme:light}
+body{background:var(--t-bg)!important;color:var(--t-text)!important}
+.header{background:var(--t-header)!important;border:1px solid var(--t-line)!important;box-shadow:var(--t-shadow)!important}
+.section{background:var(--t-card)!important;border:1px solid var(--t-line)!important;box-shadow:var(--t-shadow-sm)}
+.title-top,.brand-top{color:var(--t-accent2)!important}
+h1,.brand-main{color:var(--t-head-text)!important}
+.subtitle,.brand-sub{color:var(--t-muted)!important}
+.badge,.header-badge{background:var(--t-badge-bg)!important;border:1px solid var(--t-badge-line)!important;color:var(--t-badge-text)!important}
+.tab{background:var(--t-tab)!important;color:var(--t-muted)!important;border:1px solid var(--t-line)!important;box-shadow:none!important}
+.tab.active{background:var(--t-grad)!important;color:#fff!important;border-color:transparent!important;box-shadow:var(--t-glow)!important}
+.section-title{color:var(--t-accent)!important}
+label{color:var(--t-text)!important}
+.help,.empty{color:var(--t-muted)!important}
+input[type="text"],input[type="number"],input[type="date"],textarea,select{background:var(--t-input)!important;border:1px solid var(--t-line)!important;color:var(--t-text)!important}
+input::placeholder,textarea::placeholder{color:var(--t-ph)!important}
+input:focus,textarea:focus,select:focus{border-color:var(--t-accent)!important;box-shadow:0 0 0 3px var(--t-ring)!important}
+.note{background:var(--t-soft)!important;border:1px solid var(--t-soft-line)!important;color:var(--t-text)!important}
+.photo,.photo-drop{border-color:var(--t-dash)!important;color:var(--t-muted)!important;background:var(--t-input)}
+.btn-main{background:var(--t-grad)!important;color:#fff!important;box-shadow:var(--t-glow)!important}
+.list-item{background:var(--t-input)!important;border:1px solid var(--t-line)!important}
+.list-date{color:var(--t-accent)!important}
+.list-amount{color:var(--t-text)!important}
+.list-sub{color:var(--t-muted)!important}
+.row{border-bottom-color:var(--t-line)!important}
+.row .left,.row-left{color:var(--t-muted)!important}
+.row .right,.row-right{color:var(--t-text)!important}
+.btn-small{background:var(--t-card)!important;border:1px solid var(--t-line)!important;color:var(--t-text)!important}
+.btn-send{background:#22c55e!important;border-color:#22c55e!important;color:#fff!important}
+.btn-pdf{background:var(--t-pdf)!important;border-color:var(--t-pdf)!important;color:#fff!important}
+.btn-danger{background:#fff!important;border-color:#f3b4b4!important;color:#dc2626!important}
+.fbtn-send{background:#22c55e!important;box-shadow:0 8px 18px rgba(34,197,94,.25)}
+.fbtn-pdf{background:var(--t-pdf)!important;border:none!important}
+.sum-green{color:#16a34a!important}
+#sendbar{background:#fff!important;border:1px solid var(--t-line)!important}
+#sendbar button:last-child{background:var(--t-input)!important;color:var(--t-text)!important;border-color:var(--t-line)!important}
+@media (max-width:560px){
+  .brand{flex-wrap:wrap}
+  h1,.brand-main{font-size:26px!important;line-height:1.1!important}
+  .title-block,.brand-text{min-width:0;flex:1 1 220px}
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -721,7 +779,7 @@ function showDetail(id){
     row('Anlass', esc(b.anlass) + (b.detail ? '<br><small>'+esc(b.detail)+'</small>' : '')) +
     row('Betrag', b.betrag.toFixed(2)+' €') +
     row('Trinkgeld', (b.trink||0).toFixed(2)+' €') +
-    row('Gesamt', '<span style="color:#7ef0a1">'+b.gesamt.toFixed(2)+' €</span>') +
+    row('Gesamt', '<span class="sum-green" style="color:#16a34a">'+b.gesamt.toFixed(2)+' €</span>') +
     (b.note ? row('Notiz', esc(b.note)) : '');
   if(b.photos && b.photos.length){
     html += '<div class="photo-grid" style="margin-top:14px;">';
